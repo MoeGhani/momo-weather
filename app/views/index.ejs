@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Momo's weather</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body class="<%= theme %>">
+    <div class="container">
+      <h1 class="app-title">Momo's weather</h1>
+  
+      <div class="buttons">
+        <!-- Toggle Button to switch between °C and °F -->
+        <button class="toggle-button" onclick="toggleTemperature()">°C / °F</button>
+        
+        <!-- Dark Mode Toggle -->
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">Switch to <%= theme === 'light' ? 'Dark' : 'Light' %> Mode</button>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="city" placeholder="Search for places..." onkeypress="checkEnter(event)">
+        <button onclick="fetchWeather()">Search</button>
+      </div>
+  
+      <!-- Current Weather -->
+      <% if (weather) { %>
+        <div class="current-weather">
+          <h2 class="city-name"><%= weather.city %></h2>
+          <p class="temperature">
+            <span class="tempValue" data-original="<%= weather.temperature %>"><%= weather.temperature %></span>°<span class="tempUnit">C</span> - <%= weather.description %>
+          </p>
+          <span class="weather-icon <%= weather.condition.toLowerCase() %>">
+            <%= weather.condition === "Clear" ? "☀️" : (weather.condition === "Clouds" ? "☁️" : (weather.condition === "Rain" ? "🌧️" : "❄️")) %>
+          </span>
+          <p>Wind: <%= weather.windSpeed %> m/s</p>
+          <p>Humidity: <%= weather.humidity %>%</p>
+          <p>Visibility: <%= weather.visibility %> km</p>
+        </div>
+        
+        <!-- Previously Searched Cities -->
+        <div class="searched-cities">
+            <h3>Previously Searched Cities</h3>
+            <div class="city-cards">
+              <% cities.forEach(city => { %>
+                <div class="city-card <%= city.condition.toLowerCase() %>">
+                  <h4><%= city.city %></h4>
+                  <p class="temperature">
+                    <span class="tempValue" data-original="<%= city.temperature %>"><%= city.temperature %></span>°<span class="tempUnit">C</span> - <%= city.description %>
+                  </p>
+                  <span class="weather-icon <%= city.condition.toLowerCase() %>">
+                    <%= city.condition === "Clear" ? "☀️" : (city.condition === "Clouds" ? "☁️" : (city.condition === "Rain" ? "🌧️" : "❄️")) %>
+                  </span>
+                </div>
+              <% }); %>
+            </div>
+        </div>
+      <% } else if (error) { %>
+        <p class="error"><%= error %></p>
+      <% } %>
+
+    </div>
+  </div>
+  
+  <script>
+    let currentUnit = 'C'; // Declare a global variable for the unit (Celsius by default)
+
+    // Function to switch temperature between Celsius and Fahrenheit
+    function toggleTemperature() {
+      const tempValueElements = document.querySelectorAll('.tempValue');
+      const tempUnitElements = document.querySelectorAll('.tempUnit');
+      
+      // Store the current unit before the loop
+      const newUnit = currentUnit === 'C' ? 'F' : 'C';
+
+      tempValueElements.forEach((element, index) => {
+        let originalTemp = parseFloat(element.dataset.original); // Get the original temperature value
+
+        if (currentUnit === 'C') {
+          // Convert Celsius to Fahrenheit
+          element.innerText = Math.round((originalTemp * 9/5 + 32) * 10) / 10;
+        } else {
+          // Reset to original Celsius value
+          element.innerText = Math.round(originalTemp * 10) / 10;
+        }
+        
+        // Update the unit display
+        if (tempUnitElements[index]) {
+          tempUnitElements[index].innerText = newUnit;
+        }
+      });
+
+      // Update the current unit after processing all elements
+      currentUnit = newUnit;
+    }
+    
+
+    // Fetch weather for the searched city
+    function fetchWeather() {
+      const city = document.getElementById('city').value;
+      if (city) {
+        window.location.href = `/weather?city=${city}`;
+      }
+    }
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.body.classList.remove(currentTheme);
+      document.body.classList.add(newTheme);
+      document.cookie = `theme=${newTheme}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+      window.location.reload();
+    }
+
+    // Check for Enter key press to submit form
+    function checkEnter(event) {
+      if (event.key === "Enter") {
+        fetchWeather();
+      }
+    }
+  </script>
+</body>
+</html>

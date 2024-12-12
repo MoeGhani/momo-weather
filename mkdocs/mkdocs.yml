@@ -1,0 +1,9 @@
+site_name: Weather App Documentation
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Configuration: configuration.md
+  - Routes: routes.md

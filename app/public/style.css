@@ -1,0 +1,300 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.5s ease;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .app-title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .search-bar input {
+    width: 70%;
+    padding: 12px;
+    font-size: 1.1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .search-bar button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-bar button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Weather Info */
+  .current-weather {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .city-name {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .temperature {
+    font-size: 1.5em;
+    color: #555;
+  }
+  
+  .weather-icon {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Dynamic Weather Backgrounds */
+  .sunny {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Sunny gradient */
+  }
+  
+  .cloudy {
+    background: linear-gradient(to right, #B9D3C2, #8E9EAB); /* Cloudy gradient */
+  }
+  
+  .rainy {
+    background: linear-gradient(to right, #4D79FF, #00C9FF); /* Rainy gradient */
+  }
+  
+  .snowy {
+    background: linear-gradient(to right, #C1E1FF, #A1C4FD); /* Snowy gradient */
+  }
+  
+  /* City Cards */
+  .city-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .city-card {
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .city-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .city-card img {
+    width: 60px;
+    height: 60px;
+    margin: 15px 0;
+  }
+  
+  .city-card h4 {
+    font-size: 1.3em;
+    color: #333;
+  }
+  
+  .city-card p {
+    font-size: 1.1em;
+    color: #666;
+  }
+  
+  /* Weather-based styling for the cards */
+  .city-card.clear {
+    background-color: #FFEB3B;
+  }
+  
+  .city-card.clouds {
+    background-color: #B0BEC5;
+  }
+  
+  .city-card.rain {
+    background-color: #80C5E6;
+  }
+  
+  .city-card.snow {
+    background-color: #B3D9FF;
+  }
+  
+  /* Emoji styling - Colorful and interactive */
+  .weather-icon {
+    font-size: 50px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    display: inline-block;
+  }
+  
+  .weather-icon.sunny {
+    background: linear-gradient(to bottom, #ff9e00, #ffcc00);
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    font-size: 60px;
+  }
+  
+  .weather-icon.cloudy {
+    background: linear-gradient(to bottom, #aaa, #ddd);
+    padding: 10px;
+    border-radius: 50%;
+    color: #666;
+    font-size: 60px;
+  }
+  
+  .weather-icon.rainy {
+    background: linear-gradient(to bottom, #00aaff, #0044cc);
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    font-size: 60px;
+  }
+  
+  .weather-icon.snowy {
+    background: linear-gradient(to bottom, #80e0ff, #c0e7ff);
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    font-size: 60px;
+  }
+  
+  .weather-icon:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+  }
+  
+  /* General animation */
+  @keyframes pop {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .city-card {
+    animation: pop 0.5s ease-in-out;
+  }
+  /* Style for the toggle button */
+  .toggle-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.2s ease;
+
+  }
+  
+  .toggle-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+
+  .toggle-button:focus {
+    outline: none;
+  }
+
+  .toggle-button:active {
+    background-color: #3e8e41;
+  }
+
+  /* Optional: Style for the temperature unit span */
+  #tempUnit {
+    font-weight: bold;
+  }
+
+  /* Light Mode Styles (default) */
+body.light {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .container.light {
+    background-color: white;
+  }
+  
+  .app-title.light {
+    color: #333;
+  }
+  
+  /* Dark Mode Styles */
+  body.dark {
+    background-color: #2c3e50;
+    color: white;
+  }
+  
+  .container.dark {
+    background-color: #34495e;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .app-title.dark {
+    color: #ecf0f1;
+  }
+  
+  /* Button for Dark Mode Toggle */
+  .dark-mode-toggle {
+    padding: 10px 20px;
+    margin-left: 20px;
+    font-size: 1.2em;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .dark-mode-toggle:hover {
+    background-color: #555;
+  }
+  
+  .buttons {
+    display: flex;
+    margin: 10px 0 20px 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
