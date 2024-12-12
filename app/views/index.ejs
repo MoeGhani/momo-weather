@@ -12,7 +12,7 @@
   
       <div class="buttons">
         <!-- Toggle Button to switch between °C and °F -->
-        <button class="toggle-button" onclick="toggleTemperature()">°C / °F</button>
+        <button class="toggle-button" onclick="toggleTemperature()">°<span class="tempUnit">C</span></button>
         
         <!-- Dark Mode Toggle -->
         <button class="dark-mode-toggle" onclick="toggleDarkMode()">Switch to <%= theme === 'light' ? 'Dark' : 'Light' %> Mode</button>
